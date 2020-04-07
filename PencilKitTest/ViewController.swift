@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import PencilKit
 
 class ViewController: UIViewController {
+    
+    let canvasView: PKCanvasView = PKCanvasView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.addSubview(canvasView)
     }
 
 
