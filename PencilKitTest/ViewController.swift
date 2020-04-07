@@ -11,12 +11,26 @@ import PencilKit
 
 class ViewController: UIViewController {
     
-    let canvasView: PKCanvasView = PKCanvasView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    lazy var canvasView: PKCanvasView = PKCanvasView(frame: self.view.frame)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = #colorLiteral(red: 0.3019607843, green: 0.5725490196, blue: 0.6901960784, alpha: 1)
         view.addSubview(canvasView)
+        
+        canvasView.backgroundColor = .clear
+        canvasView.isOpaque = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Tool Picker criado
+        guard let window = view.window, let toolPicker = PKToolPicker.shared(for: window) else { return }
+        toolPicker.setVisible(true, forFirstResponder: canvasView)
+        toolPicker.addObserver(canvasView)
+        canvasView.becomeFirstResponder()
     }
 
 
